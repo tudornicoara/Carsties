@@ -1,3 +1,16 @@
-﻿Create docker postgres service:
+﻿Create docker services:
 
 - docker compose up -d
+
+Delete docker services:
+
+- docker compose down
+
+Dockerize services:
+
+docker build -f .\src\AuctionService\Dockerfile -t testing123 .
+
+docker compose build auction-svc
+docker compose build search-svc
+docker compose build identity-svc
+docker compose build gateway-svc
