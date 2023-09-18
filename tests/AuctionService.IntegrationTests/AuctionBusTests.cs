@@ -50,7 +50,7 @@ public class AuctionBusTests : IAsyncLifetime
     
     public Task DisposeAsync() => Task.CompletedTask;
 
-    private CreateAuctionDto GetAuctionForCreate()
+    private static CreateAuctionDto GetAuctionForCreate()
     {
         return new CreateAuctionDto
         {

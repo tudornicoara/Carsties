@@ -14,7 +14,7 @@ public class AuctionControllerTests : IAsyncLifetime
 {
     private readonly CustomWebAppFactory _factory;
     private readonly HttpClient _httpClient;
-    private const string GT_ID = "afbee524-5972-4075-8800-7d1f9d7b0a0c";
+    private const string GtId = "afbee524-5972-4075-8800-7d1f9d7b0a0c";
 
     public AuctionControllerTests(CustomWebAppFactory factory)
     {
@@ -40,7 +40,7 @@ public class AuctionControllerTests : IAsyncLifetime
         // Arrange?
         
         // Act
-        var response = await _httpClient.GetFromJsonAsync<AuctionDto>($"api/auctions/{GT_ID}");
+        var response = await _httpClient.GetFromJsonAsync<AuctionDto>($"api/auctions/{GtId}");
         
         // Assert
         response.Model.Should().Be("GT");
@@ -123,7 +123,7 @@ public class AuctionControllerTests : IAsyncLifetime
         _httpClient.SetFakeJwtBearerToken(AuthHelper.GetBearerForUser("bob"));
 
         // Act
-        var response = await _httpClient.PutAsJsonAsync($"api/auctions/{GT_ID}", updateAuction);
+        var response = await _httpClient.PutAsJsonAsync($"api/auctions/{GtId}", updateAuction);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -137,7 +137,7 @@ public class AuctionControllerTests : IAsyncLifetime
         _httpClient.SetFakeJwtBearerToken(AuthHelper.GetBearerForUser("notbob"));
 
         // Act
-        var response = await _httpClient.PutAsJsonAsync($"api/auctions/{GT_ID}", updateAuction);
+        var response = await _httpClient.PutAsJsonAsync($"api/auctions/{GtId}", updateAuction);
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
@@ -153,7 +153,7 @@ public class AuctionControllerTests : IAsyncLifetime
     
     public Task DisposeAsync() => Task.CompletedTask;
 
-    private CreateAuctionDto GetAuctionForCreate()
+    private static CreateAuctionDto GetAuctionForCreate()
     {
         return new CreateAuctionDto
         {
