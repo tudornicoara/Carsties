@@ -24,7 +24,7 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetim
     {
         builder.ConfigureTestServices(services =>
         {
-            services.RemoveDbContext<AuctionDbContext>();
+            services.RemoveDbContext();
             
             services.AddDbContext<AuctionDbContext>(options =>
             {
@@ -33,7 +33,7 @@ public class CustomWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetim
 
             services.AddMassTransitTestHarness();
             
-            services.EnsureCreated<AuctionDbContext>();
+            services.EnsureCreated();
 
             services.AddAuthentication(FakeJwtBearerDefaults.AuthenticationScheme)
                 .AddFakeJwtBearer(opt =>
