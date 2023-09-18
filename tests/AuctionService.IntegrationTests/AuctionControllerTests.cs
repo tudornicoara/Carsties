@@ -9,7 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AuctionService.IntegrationTests;
 
-public class AuctionControllerTests : IClassFixture<CustomWebAppFactory>, IAsyncLifetime
+[Collection("Shared collection")]
+public class AuctionControllerTests : IAsyncLifetime
 {
     private readonly CustomWebAppFactory _factory;
     private readonly HttpClient _httpClient;
@@ -141,9 +142,7 @@ public class AuctionControllerTests : IClassFixture<CustomWebAppFactory>, IAsync
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
     }
-    
-    public Task DisposeAsync() => Task.CompletedTask;
-    
+
     public Task InitializeAsync()
     {
         using var scope = _factory.Services.CreateScope();
@@ -151,6 +150,8 @@ public class AuctionControllerTests : IClassFixture<CustomWebAppFactory>, IAsync
         DbHelper.ReinitDbForTests(db);
         return Task.CompletedTask;
     }
+    
+    public Task DisposeAsync() => Task.CompletedTask;
 
     private CreateAuctionDto GetAuctionForCreate()
     {
