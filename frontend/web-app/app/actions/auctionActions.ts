@@ -1,8 +1,7 @@
 'use server'
 
-import { fetchWrapper } from './../../../lib/fetchWrapper';
+import { fetchWrapper } from '../lib/fetchWrapper';
 import { Auction, Bid, PagedResult } from "@/types";
-import { getTokenWorkaround } from "./authActions";
 import { FieldValues } from 'react-hook-form';
 import { revalidatePath } from 'next/cache';
 
